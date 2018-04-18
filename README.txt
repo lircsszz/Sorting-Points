@@ -1,4 +1,11 @@
 # Sorting-Points
-Using OpenCV to distinguish dots and sort them by any order.
+Using OpenCV to distinguish points and sort them by any order.
 
-Recently I'm doing an interesting project, distinguish dots and sort them by any order. After querying relevant data, I find out that there are mainly three methods to distinguish and sort points.
+Recently I'm doing an interesting project, distinguishing dots and sorting them by any order. After querying relevant data, I find out that there are mainly three methods to distinguish and sort points.
+
+First, you can use the convex hull algorithm to sort the points, you need find a specific line, which below this line do not have any points, and all the points are above this line. After that, you need rotate this line counterclockwise, and try to include all the points, the first point included as number one, and the second is number two, and so on.
+
+The second algorithm is sorting points by quadrant. Due to the specific scenario I’m facing, the first four points are distributed in each quadrant, and the last point is either around the middle of the coordinate system or between the top-left point and the lower left point. That makes me easy to distinguish each point, first you need to calculate an “avg” point, its x coordinate value equals to the average x coordinate value of all points and its y coordinate value equals to the average y coordinate value of all points. After calculating the “avg” point, you can distinguish all the points into two piles, if a point’s x value large than avg point’s x value, put this point in left pile, and the other points are in right pile. And then, you can distinguish those points by pile, and its y value, for example, there are five points,(1,1) (1,5) (1,10) (5,1) (5,10), the left pile have three points (1,1),(1,5),(1,10), and the right pile have other two points (5,1), (5,10), you can use an vector variable to save those points.
+
+The last one combines the above two algorithms, first, you need to find the bottom two points of all points, and connect these two points into a straight line. Then calculate the angle between the remaining three points and this line. Finally, you need to calculate the length between the lower left point and the remaining three points, then create a class to save those points with length and angle property. There is a trick here when you save all points in a vector you created, you need to delete this point, which has the shortest length, and push the other points into a vector with the order you want, and the push the shortest point at the end of this vector. To do this you may need to make a copy of the original vector before you delete the shortest point.
+
