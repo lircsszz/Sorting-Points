@@ -76,7 +76,7 @@ int recognize(std::vector<cv::Point2f> &marks)
     float err = calError(temp1,r1,t1);//PnP
     //R = r1;
     //T = t1;
-	Debug("err");
+	Debug("err");//use debugview to show the result
 	Debug(err);
     return 2;
 }
